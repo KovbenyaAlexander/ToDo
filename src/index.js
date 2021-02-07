@@ -3,15 +3,15 @@ import ReactDom from 'react-dom';
 
 import AppHeader from './components/AppHeader/AppHeader';
 import TodoList from './components/TodoList/TodoList';
-import SearchPanel from './components/TodoSettings/SearchPanel/SearchPanel';
-import ItemFilter from './components/TodoSettings/ItemFilter/ItemFilter';
 import TodoSettings from './components/TodoSettings/TodoSettings';
 
 const todos = [
   { id: 1, text: 'first' },
   { id: 2, text: 'second' },
   { id: 3, text: 'third' },
+  { id: 3, text: 'E' },
 ]
+
 const App = () => {
   return (
     <>
