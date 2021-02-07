@@ -1,23 +1,42 @@
 import React, { useState } from 'react';
-
+import './TodoItem.css'
 
 const TodoItem = (props) => {
-
   const [isDone, setDone] = useState(false);
-  const style = {
-    textDecoration: isDone ? 'line-through' : 'none',
-    color: isDone ? 'gray' : 'black',
+  const [isImportant, setImportant] = useState(false);
+
+  let classNames = 'todo-list__item';
+
+  if (isImportant) {
+    classNames += ' important';
   }
 
-  const onclickHandler = () => {
+  if (isDone) {
+    classNames += ' isDOne';
+  }
+
+  const spanOnclickHandler = () => {
     setDone(!isDone);
   }
 
+  const makeTaskImportant = () => {
+    setImportant(!isImportant);
+  }
+
   return (
-    <span style={style} onClick={onclickHandler}>{props.text}</span>
+    <>
+      <span className={classNames} onClick={spanOnclickHandler}>{props.text}</span>
+      <div className="list-item__control">
+        <button type="button" className="btn btn-outline-success" onClick={makeTaskImportant}>
+          <i className="fa fa-exclamation" />
+        </button>
+
+        <button type="button" className="btn btn-outline-danger" onClick={props.onDeleted}>
+          <i className="fa fa-trash-o" />
+        </button>
+      </div>
+    </>
   )
 }
-
-
 
 export default TodoItem;

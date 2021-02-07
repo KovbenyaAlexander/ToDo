@@ -1,0 +1,13 @@
+.todo-list__item.important{ 
+  font-size: 20px;
+  color: red;
+}
+
+.isDOne{
+  text-decoration: line-through;
+  color: gray;
+}
+
+.btn{
+  margin-left: 5px;
+}

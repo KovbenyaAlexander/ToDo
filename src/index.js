@@ -9,7 +9,7 @@ const todos = [
   { id: 1, text: 'first' },
   { id: 2, text: 'second' },
   { id: 3, text: 'third' },
-  { id: 3, text: 'E' },
+  { id: 4, text: 'E' },
 ]
 
 const App = () => {
@@ -18,7 +18,11 @@ const App = () => {
       <AppHeader />
       <main>
         <TodoSettings />
-        <TodoList todos={todos} />
+        <TodoList
+          todos={todos}
+          onDeleted={(id) => {
+            console.log(id);
+          }} />
       </main>
     </>
   )
