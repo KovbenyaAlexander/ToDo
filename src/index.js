@@ -1,31 +1,16 @@
 import React from 'react';
 import ReactDom from 'react-dom';
+import App from './App';
+import { createStore } from 'redux';
+import reducer from './redux/reducer';
+import { Provider, connect } from 'react-redux';
 
-import AppHeader from './components/AppHeader/AppHeader';
-import TodoList from './components/TodoList/TodoList';
-import TodoSettings from './components/TodoSettings/TodoSettings';
+const store = createStore(reducer);
 
-const todos = [
-  { id: 1, text: 'first' },
-  { id: 2, text: 'second' },
-  { id: 3, text: 'third' },
-  { id: 4, text: 'E' },
-]
+const app = (
+  <Provider store={store}>
+    <App />
+  </Provider>
+)
 
-const App = () => {
-  return (
-    <>
-      <AppHeader />
-      <main>
-        <TodoSettings />
-        <TodoList
-          todos={todos}
-          onDeleted={(id) => {
-            console.log(id);
-          }} />
-      </main>
-    </>
-  )
-}
-
-ReactDom.render(<App />, document.querySelector('#root'))
+ReactDom.render(app, document.querySelector('#root'))

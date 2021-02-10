@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './TodoItem.css'
 
 const TodoItem = (props) => {
+
   const [isDone, setDone] = useState(false);
   const [isImportant, setImportant] = useState(false);
 
@@ -31,7 +32,7 @@ const TodoItem = (props) => {
           <i className="fa fa-exclamation" />
         </button>
 
-        <button type="button" className="btn btn-outline-danger" onClick={props.onDeleted}>
+        <button type="button" className="btn btn-outline-danger" onClick={() => { props.onDelete(props.id) }}>
           <i className="fa fa-trash-o" />
         </button>
       </div>

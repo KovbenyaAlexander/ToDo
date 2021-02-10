@@ -8,7 +8,8 @@ const TodoList = (props) => {
     return (
       <li className="list-group-item list__item">
         <TodoItem text={item.text}
-          onDeleted={() => { props.onDeleted(item.id) }}
+          id={item.id}
+          onDelete={props.onDelete}
         />
       </li>
     )
