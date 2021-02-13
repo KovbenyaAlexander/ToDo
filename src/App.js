@@ -14,10 +14,12 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
   onDelete: (id) => dispatch({ type: 'DELETE_TASK', id }),
   onAdd: (text) => dispatch({ type: 'ADD_TASK', text }),
+  onImportant: (id) => dispatch({ type: 'TOGGLE_IPMORTANT', id }),
+  onDone: (id) => dispatch({ type: 'TOGGLE_DONE', id }),
 })
 
 const App = (props) => {
-  console.log(props);
+  // console.log(props);
 
   return (
     <>
@@ -26,7 +28,9 @@ const App = (props) => {
         <TodoSettings />
         <TodoList
           todos={props.todos}
-          onDelete={props.onDelete} />
+          onDelete={props.onDelete}
+          onDone={props.onDone}
+          onImportant={props.onImportant} />
         <ItemAddForm
           onAdd={props.onAdd} />
       </main>

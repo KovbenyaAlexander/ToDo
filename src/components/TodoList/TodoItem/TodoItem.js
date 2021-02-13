@@ -1,34 +1,25 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './TodoItem.css'
 
 const TodoItem = (props) => {
-
-  const [isDone, setDone] = useState(false);
-  const [isImportant, setImportant] = useState(false);
+  // console.log(props);
 
   let classNames = 'todo-list__item';
 
-  if (isImportant) {
+  if (props.isImportant) {
     classNames += ' important';
   }
 
-  if (isDone) {
+  if (props.isDone) {
     classNames += ' isDOne';
-  }
-
-  const spanOnclickHandler = () => {
-    setDone(!isDone);
-  }
-
-  const makeTaskImportant = () => {
-    setImportant(!isImportant);
   }
 
   return (
     <>
-      <span className={classNames} onClick={spanOnclickHandler}>{props.text}</span>
+      <span className={classNames} onClick={() => props.onDone(props.id)}>{props.text}</span>
+      <span >{`ID-->${props.id}`}</span>
       <div className="list-item__control">
-        <button type="button" className="btn btn-outline-success" onClick={makeTaskImportant}>
+        <button type="button" className="btn btn-outline-success" onClick={() => props.onImportant(props.id)}>
           <i className="fa fa-exclamation" />
         </button>
 
