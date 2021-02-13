@@ -23,7 +23,7 @@ const App = (props) => {
 
   return (
     <>
-      <AppHeader />
+      <AppHeader todos={props.todos} />
       <main>
         <TodoSettings />
         <TodoList

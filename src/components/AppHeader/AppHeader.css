@@ -1,4 +1,13 @@
 .header{
-  width: 500px;
+  display: flex;
+  justify-content:space-between;
+  width: 490px;
   margin: 0 auto;
+}
+
+.header-statistics{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  color: gray
 }
