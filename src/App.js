@@ -8,6 +8,7 @@ import ItemAddForm from './components/ItemAddForm/ItemAddForm'
 const mapStateToProps = (state) => {
   return {
     todos: state.todos,
+    inputText: state.inputText
   }
 }
 
@@ -16,10 +17,12 @@ const mapDispatchToProps = (dispatch) => ({
   onAdd: (text) => dispatch({ type: 'ADD_TASK', text }),
   onImportant: (id) => dispatch({ type: 'TOGGLE_IPMORTANT', id }),
   onDone: (id) => dispatch({ type: 'TOGGLE_DONE', id }),
+  onInputChange: (inputText) => dispatch({ type: 'INPUT_CHANGE', inputText }),
+  addTask: () => dispatch({ type: 'ADD_TASK' }),
 })
 
 const App = (props) => {
-  // console.log(props);
+  console.log(props);
 
   return (
     <>
@@ -32,7 +35,10 @@ const App = (props) => {
           onDone={props.onDone}
           onImportant={props.onImportant} />
         <ItemAddForm
-          onAdd={props.onAdd} />
+          onInputChange={props.onInputChange}
+          onAdd={props.onAdd}
+          addTask={props.addTask}
+          inputText={props.inputText} />
       </main>
     </>
   )

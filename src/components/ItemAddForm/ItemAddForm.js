@@ -3,10 +3,24 @@ import React from 'react';
 
 const ItemAddForm = (props) => {
 
+  console.log(props);
+
+
+  const onInputChange = (e) => {
+    props.onInputChange(e.target.value)
+  }
+
+  const onFormSubmit = (e) => {
+    e.preventDefault();
+    props.onAdd();
+  }
+
+
   return (
-    <div className="item-add-form">
-      <button onClick={() => props.onAdd('new item')} className="btn btn-success">Add</button>
-    </div>
+    <form onSubmit={onFormSubmit} className="item-add-form d-flex">
+      <input value={props.inputText} type="text" onChange={onInputChange}></input>
+      <button className="btn btn-success">Add</button>
+    </form>
   )
 
 }

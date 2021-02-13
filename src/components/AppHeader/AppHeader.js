@@ -1,7 +1,7 @@
 import React from 'react';
 import './AppHeader.css'
 const AppHeader = (props) => {
-  console.log(props.todos);
+  // console.log(props.todos);
 
   const countOfDoneTasks = props.todos.filter(item => item.isDone).length;
   const countOfActiveTasks = props.todos.filter(item => !item.isDone).length;
