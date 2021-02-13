@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import AppHeader from './components/AppHeader/AppHeader';
 import TodoList from './components/TodoList/TodoList';
 import TodoSettings from './components/TodoSettings/TodoSettings';
+import ItemAddForm from './components/ItemAddForm/ItemAddForm'
 
 const mapStateToProps = (state) => {
   return {
@@ -12,6 +13,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
   onDelete: (id) => dispatch({ type: 'DELETE_TASK', id }),
+  onAdd: (text) => dispatch({ type: 'ADD_TASK', text }),
 })
 
 const App = (props) => {
@@ -25,6 +27,8 @@ const App = (props) => {
         <TodoList
           todos={props.todos}
           onDelete={props.onDelete} />
+        <ItemAddForm
+          onAdd={props.onAdd} />
       </main>
     </>
   )

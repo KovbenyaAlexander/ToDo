@@ -1,3 +1,4 @@
+let taskID = 10;
 const initialState = {
   todos: [
     { id: 0, text: '111' },
@@ -13,6 +14,8 @@ export default function reducer(state = initialState, action) {
     case 'DELETE_TASK':
       const newTodos = state.todos.filter(item => item.id !== action.id)
       return { todos: newTodos }
+    case 'ADD_TASK':
+      return { todos: [...state.todos, { id: taskID++, text: action.text }] }
     default:
       return state;
   }
