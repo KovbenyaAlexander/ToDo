@@ -1,23 +1,34 @@
-let taskID = 10;
-const initialState = {
-  todos: [
-    { id: 0, text: 'Task1', isImportant: false, isDone: false },
-    { id: 1, text: 'Task2', isImportant: true, isDone: true },
-    { id: 2, text: 'Task3', isImportant: true, isDone: false },
-    { id: 3, text: 'Task4', isImportant: false, isDone: true },
-  ],
-  visibleTodos: [
-    { id: 0, text: 'Task1', isImportant: false, isDone: false },
-    { id: 1, text: 'Task2', isImportant: true, isDone: true },
-    { id: 2, text: 'Task3', isImportant: true, isDone: false },
-    { id: 3, text: 'Task4', isImportant: false, isDone: true },
-  ],
-  inputText: '',
-  searchText: '',
-  showingAllTasks: true,
-  showingActiveTasks: false,
-  showingDoneTasks: false,
+import { storage } from '../helpers'
+let taskID = 1000;
+
+let initialState;
+
+if (storage('$$state')) {
+  initialState = storage('$$state')
+} else {
+  initialState = {
+    todos: [
+      { id: 0, text: 'Task1', isImportant: false, isDone: false },
+      { id: 1, text: 'Task2', isImportant: true, isDone: true },
+      { id: 2, text: 'Task3', isImportant: true, isDone: false },
+      { id: 3, text: 'Task4', isImportant: false, isDone: true },
+    ],
+    visibleTodos: [
+      { id: 0, text: 'Task1', isImportant: false, isDone: false },
+      { id: 1, text: 'Task2', isImportant: true, isDone: true },
+      { id: 2, text: 'Task3', isImportant: true, isDone: false },
+      { id: 3, text: 'Task4', isImportant: false, isDone: true },
+    ],
+    inputText: '',
+    searchText: '',
+    showingAllTasks: true,
+    showingActiveTasks: false,
+    showingDoneTasks: false,
+  }
 }
+
+
+
 
 export default function reducer(state = initialState, action) {
   const newState = JSON.parse(JSON.stringify(state));
@@ -25,6 +36,7 @@ export default function reducer(state = initialState, action) {
     case 'DELETE_TASK':
       newState.todos = newState.todos.filter(item => item.id !== action.id);
       newState.visibleTodos = newState.visibleTodos.filter(item => item.id !== action.id);
+      storage('$$state', newState);
       return newState;
 
     case 'ADD_TASK':
@@ -34,8 +46,10 @@ export default function reducer(state = initialState, action) {
         newState.visibleTodos = [...state.todos, { id: taskID, text: state.inputText, isImportant: false }];
         newState.inputText = '';
         newState.searchText = '';
+        storage('$$state', newState);
         return newState;
       }
+      storage('$$state', newState);
       return newState;
 
     case 'TOGGLE_IPMORTANT':
@@ -63,6 +77,7 @@ export default function reducer(state = initialState, action) {
           return item;
         }
       });
+      storage('$$state', newState);
       return newState;
 
     case 'TOGGLE_DONE':
@@ -90,10 +105,12 @@ export default function reducer(state = initialState, action) {
           return item;
         }
       });
+      storage('$$state', newState);
       return newState;
 
     case 'INPUT_CHANGE':
       newState.inputText = action.inputText;
+      storage('$$state', newState);
       return newState;
 
     case 'SORT_TASKS':
@@ -107,6 +124,7 @@ export default function reducer(state = initialState, action) {
       if (newState.showingDoneTasks) {
         newState.visibleTodos = newState.visibleTodos.filter(item => item.isDone)
       }
+      storage('$$state', newState);
       return newState;
 
     case 'SHOW_ALL':
@@ -114,6 +132,7 @@ export default function reducer(state = initialState, action) {
       newState.showingAllTasks = true;
       newState.showingActiveTasks = false;
       newState.showingDoneTasks = false;
+      storage('$$state', newState);
       return newState;
 
     case 'SHOW_ACTIVE':
@@ -121,6 +140,7 @@ export default function reducer(state = initialState, action) {
       newState.showingAllTasks = false;
       newState.showingActiveTasks = true;
       newState.showingDoneTasks = false;
+      storage('$$state', newState);
       return newState;
 
     case 'SHOW_DONE':
@@ -128,8 +148,8 @@ export default function reducer(state = initialState, action) {
       newState.showingAllTasks = false;
       newState.showingActiveTasks = false;
       newState.showingDoneTasks = true;
+      storage('$$state', newState);
       return newState;
-
     default:
       return newState;
   }
