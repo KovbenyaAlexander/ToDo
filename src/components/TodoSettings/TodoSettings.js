@@ -4,10 +4,11 @@ import ItemFilter from './ItemFilter/ItemFilter';
 import SearchPanel from './SearchPanel/SearchPanel';
 
 import './TodoSettings.css'
-const TodoSettings = () => {
+const TodoSettings = (props) => {
   return (
     <div className="todoSettings">
-      <SearchPanel />
+      <SearchPanel sortTasks={props.sortTasks}
+        searchText={props.searchText} />
       <ItemFilter />
     </div>
   )

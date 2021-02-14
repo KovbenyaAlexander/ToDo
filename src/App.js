@@ -8,7 +8,9 @@ import ItemAddForm from './components/ItemAddForm/ItemAddForm'
 const mapStateToProps = (state) => {
   return {
     todos: state.todos,
-    inputText: state.inputText
+    inputText: state.inputText,
+    searchText: state.searchText,
+    visibleTodos: state.visibleTodos,
   }
 }
 
@@ -19,18 +21,22 @@ const mapDispatchToProps = (dispatch) => ({
   onDone: (id) => dispatch({ type: 'TOGGLE_DONE', id }),
   onInputChange: (inputText) => dispatch({ type: 'INPUT_CHANGE', inputText }),
   addTask: () => dispatch({ type: 'ADD_TASK' }),
+  sortTasks: (sortText) => dispatch({ type: 'SORT_TASKS', sortText }),
 })
 
 const App = (props) => {
-  console.log(props);
+  // console.log(props);
 
   return (
     <>
-      <AppHeader todos={props.todos} />
+      <AppHeader todos={props.visibleTodos}
+      />
       <main>
-        <TodoSettings />
+        <TodoSettings
+          sortTasks={props.sortTasks}
+          searchText={props.searchText} />
         <TodoList
-          todos={props.todos}
+          todos={props.visibleTodos}
           onDelete={props.onDelete}
           onDone={props.onDone}
           onImportant={props.onImportant} />

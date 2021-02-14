@@ -3,7 +3,7 @@ import React from 'react';
 
 const ItemAddForm = (props) => {
 
-  console.log(props);
+  // console.log(props);
 
 
   const onInputChange = (e) => {
