@@ -11,6 +11,9 @@ const mapStateToProps = (state) => {
     inputText: state.inputText,
     searchText: state.searchText,
     visibleTodos: state.visibleTodos,
+    showingAllTasks: state.showingAllTasks,
+    showingActiveTasks: state.showingActiveTasks,
+    showingDoneTasks: state.showingDoneTasks,
   }
 }
 
@@ -22,6 +25,9 @@ const mapDispatchToProps = (dispatch) => ({
   onInputChange: (inputText) => dispatch({ type: 'INPUT_CHANGE', inputText }),
   addTask: () => dispatch({ type: 'ADD_TASK' }),
   sortTasks: (sortText) => dispatch({ type: 'SORT_TASKS', sortText }),
+  showAll: () => dispatch({ type: 'SHOW_ALL' }),
+  showActive: () => dispatch({ type: 'SHOW_ACTIVE' }),
+  showDone: () => dispatch({ type: 'SHOW_DONE' }),
 })
 
 const App = (props) => {
@@ -34,7 +40,14 @@ const App = (props) => {
       <main>
         <TodoSettings
           sortTasks={props.sortTasks}
-          searchText={props.searchText} />
+          searchText={props.searchText}
+          showAll={props.showAll}
+          showActive={props.showActive}
+          showDone={props.showDone}
+          showingAllTasks={props.showingAllTasks}
+          showingActiveTasks={props.showingActiveTasks}
+          showingDoneTasks={props.showingDoneTasks}
+        />
         <TodoList
           todos={props.visibleTodos}
           onDelete={props.onDelete}

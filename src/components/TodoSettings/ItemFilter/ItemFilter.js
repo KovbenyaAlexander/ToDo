@@ -1,15 +1,17 @@
 import React from 'react';
 
-const ItemFilter = () => {
+const ItemFilter = (props) => {
+
+  const activeClassButton = 'btn btn-info';
+  const inActiveClassButton = 'btn btn-outline-secondary';
+
   return (
     <div>
-      <button className="btn btn-info">1</button>
-      <button className="btn btn-outline-secondary">2</button>
-      <button className="btn btn-outline-secondary">3</button>
+      <button onClick={props.showAll} className={props.showingAllTasks ? activeClassButton : inActiveClassButton}>All</button>
+      <button onClick={props.showActive} className={props.showingActiveTasks ? activeClassButton : inActiveClassButton}>Active</button>
+      <button onClick={props.showDone} className={props.showingDoneTasks ? activeClassButton : inActiveClassButton}>Done</button>
     </div>
   )
 }
-
-
 
 export default ItemFilter;

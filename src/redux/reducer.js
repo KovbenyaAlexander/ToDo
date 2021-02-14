@@ -1,22 +1,26 @@
 let taskID = 10;
 const initialState = {
   todos: [
-    { id: 0, text: '111', isImportant: false, isDone: false },
-    { id: 1, text: '222', isImportant: false, isDone: false },
-    { id: 2, text: '333', isImportant: false, isDone: false },
-    { id: 3, text: '444', isImportant: false, isDone: false },
+    { id: 0, text: 'Task1', isImportant: false, isDone: false },
+    { id: 1, text: 'Task2', isImportant: true, isDone: true },
+    { id: 2, text: 'Task3', isImportant: true, isDone: false },
+    { id: 3, text: 'Task4', isImportant: false, isDone: true },
   ],
   visibleTodos: [
-    { id: 0, text: '111', isImportant: false, isDone: false },
-    { id: 1, text: '222', isImportant: false, isDone: false },
-    { id: 2, text: '333', isImportant: false, isDone: false },
-    { id: 3, text: '444', isImportant: false, isDone: false },
+    { id: 0, text: 'Task1', isImportant: false, isDone: false },
+    { id: 1, text: 'Task2', isImportant: true, isDone: true },
+    { id: 2, text: 'Task3', isImportant: true, isDone: false },
+    { id: 3, text: 'Task4', isImportant: false, isDone: true },
   ],
   inputText: '',
   searchText: '',
+  showingAllTasks: true,
+  showingActiveTasks: false,
+  showingDoneTasks: false,
 }
 
 export default function reducer(state = initialState, action) {
+  // console.log(state);
   const newState = JSON.parse(JSON.stringify(state));
   switch (action.type) {
     case 'DELETE_TASK':
@@ -96,7 +100,24 @@ export default function reducer(state = initialState, action) {
       newState.visibleTodos = newState.todos.filter(item => {
         return item.text.indexOf(newState.searchText) > -1
       })
-      // console.log(newState);
+      return newState;
+    case 'SHOW_ALL':
+      newState.visibleTodos = newState.todos;
+      newState.showingAllTasks = true;
+      newState.showingActiveTasks = false;
+      newState.showingDoneTasks = false;
+      return newState;
+    case 'SHOW_ACTIVE':
+      newState.visibleTodos = newState.todos.filter(item => !item.isDone);
+      newState.showingAllTasks = false;
+      newState.showingActiveTasks = true;
+      newState.showingDoneTasks = false;
+      return newState;
+    case 'SHOW_DONE':
+      newState.visibleTodos = newState.todos.filter(item => item.isDone);
+      newState.showingAllTasks = false;
+      newState.showingActiveTasks = false;
+      newState.showingDoneTasks = true;
       return newState;
     default:
       return newState;

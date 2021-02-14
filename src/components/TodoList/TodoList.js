@@ -5,7 +5,7 @@ import TodoItem from './TodoItem/TodoItem'
 const TodoList = (props) => {
   const todoComponents = props.todos.map(item => {
     return (
-      <li className="list-group-item list__item">
+      <li key={item.id} className="list-group-item list__item">
         <TodoItem text={item.text}
           id={item.id}
           isImportant={item.isImportant}

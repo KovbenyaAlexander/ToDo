@@ -9,7 +9,13 @@ const TodoSettings = (props) => {
     <div className="todoSettings">
       <SearchPanel sortTasks={props.sortTasks}
         searchText={props.searchText} />
-      <ItemFilter />
+      <ItemFilter
+        showAll={props.showAll}
+        showActive={props.showActive}
+        showDone={props.showDone}
+        showingAllTasks={props.showingAllTasks}
+        showingActiveTasks={props.showingActiveTasks}
+        showingDoneTasks={props.showingDoneTasks} />
     </div>
   )
 }
