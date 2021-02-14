@@ -10,18 +10,19 @@ const initialState = {
 }
 
 export default function reducer(state = initialState, action) {
-
+  const newState = JSON.parse(JSON.stringify(state));
   switch (action.type) {
     case 'DELETE_TASK':
       const newTodos = state.todos.filter(item => item.id !== action.id);
-      return { todos: newTodos, inputText: state.inputText }
+      newState.todos = newTodos;
+      return newState;
     case 'ADD_TASK':
       if (state.inputText !== '') {
-        const res = { todos: [...state.todos, { id: ++taskID, text: state.inputText, isImportant: false }] }
-        res.inputText = '';
-        return res;
+        newState.todos = [...state.todos, { id: ++taskID, text: state.inputText, isImportant: false }]
+        newState.inputText = '';
+        return newState;
       }
-      return state;
+      return newState;
     case 'TOGGLE_IPMORTANT':
       const newTodosArray = state.todos.map(item => {
         if (item.id === action.id) {
@@ -35,7 +36,9 @@ export default function reducer(state = initialState, action) {
           return item;
         }
       });
-      return { todos: newTodosArray, inputText: state.inputText };
+      newState.todos = newTodosArray;
+      newState.inputText = state.inputText;
+      return newState;
     case 'TOGGLE_DONE':
       const newTodosArray_ = state.todos.map(item => {
         if (item.id === action.id) {
@@ -49,13 +52,14 @@ export default function reducer(state = initialState, action) {
           return item;
         }
       });
-      return { todos: newTodosArray_, inputText: state.inputText };
+      newState.todos = newTodosArray_;
+      newState.inputText = state.inputText;
+      return newState;
     case 'INPUT_CHANGE':
-      const newState = JSON.parse(JSON.stringify(state));
       newState.inputText = action.inputText;
       return newState;
     default:
-      return state;
+      return newState;
   }
 
 }
