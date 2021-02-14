@@ -31,8 +31,6 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 const App = (props) => {
-  // console.log(props);
-
   return (
     <>
       <AppHeader todos={props.visibleTodos}

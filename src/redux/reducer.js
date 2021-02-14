@@ -20,13 +20,13 @@ const initialState = {
 }
 
 export default function reducer(state = initialState, action) {
-  // console.log(state);
   const newState = JSON.parse(JSON.stringify(state));
   switch (action.type) {
     case 'DELETE_TASK':
       newState.todos = newState.todos.filter(item => item.id !== action.id);
       newState.visibleTodos = newState.visibleTodos.filter(item => item.id !== action.id);
       return newState;
+
     case 'ADD_TASK':
       if (state.inputText !== '') {
         taskID += 1;
@@ -37,6 +37,7 @@ export default function reducer(state = initialState, action) {
         return newState;
       }
       return newState;
+
     case 'TOGGLE_IPMORTANT':
       newState.visibleTodos = newState.visibleTodos.map(item => {
         if (item.id === action.id) {
@@ -50,7 +51,6 @@ export default function reducer(state = initialState, action) {
           return item;
         }
       });
-
       newState.todos = newState.todos.map(item => {
         if (item.id === action.id) {
           return {
@@ -64,6 +64,7 @@ export default function reducer(state = initialState, action) {
         }
       });
       return newState;
+
     case 'TOGGLE_DONE':
       newState.todos = state.todos.map(item => {
         if (item.id === action.id) {
@@ -77,7 +78,6 @@ export default function reducer(state = initialState, action) {
           return item;
         }
       });
-
       newState.visibleTodos = state.visibleTodos.map(item => {
         if (item.id === action.id) {
           return {
@@ -90,37 +90,47 @@ export default function reducer(state = initialState, action) {
           return item;
         }
       });
-
       return newState;
+
     case 'INPUT_CHANGE':
       newState.inputText = action.inputText;
       return newState;
+
     case 'SORT_TASKS':
       newState.searchText = action.sortText;
       newState.visibleTodos = newState.todos.filter(item => {
-        return item.text.indexOf(newState.searchText) > -1
+        return item.text.toLowerCase().indexOf(newState.searchText.toLowerCase()) > -1
       })
+      if (newState.showingActiveTasks) {
+        newState.visibleTodos = newState.visibleTodos.filter(item => !item.isDone)
+      }
+      if (newState.showingDoneTasks) {
+        newState.visibleTodos = newState.visibleTodos.filter(item => item.isDone)
+      }
       return newState;
+
     case 'SHOW_ALL':
       newState.visibleTodos = newState.todos;
       newState.showingAllTasks = true;
       newState.showingActiveTasks = false;
       newState.showingDoneTasks = false;
       return newState;
+
     case 'SHOW_ACTIVE':
       newState.visibleTodos = newState.todos.filter(item => !item.isDone);
       newState.showingAllTasks = false;
       newState.showingActiveTasks = true;
       newState.showingDoneTasks = false;
       return newState;
+
     case 'SHOW_DONE':
       newState.visibleTodos = newState.todos.filter(item => item.isDone);
       newState.showingAllTasks = false;
       newState.showingActiveTasks = false;
       newState.showingDoneTasks = true;
       return newState;
+
     default:
       return newState;
   }
-
 }

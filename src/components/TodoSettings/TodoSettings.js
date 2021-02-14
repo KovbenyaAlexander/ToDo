@@ -1,9 +1,8 @@
 import React from 'react';
-
 import ItemFilter from './ItemFilter/ItemFilter';
 import SearchPanel from './SearchPanel/SearchPanel';
-
 import './TodoSettings.css'
+
 const TodoSettings = (props) => {
   return (
     <div className="todoSettings">
